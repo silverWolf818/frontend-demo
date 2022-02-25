@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="move" style="position:absolute; width:100px; height:100px; background:gray"></div>
+<script>
+    const el = document.querySelector('.move')
+
+    el.addEventListener('mousedown', (event) => {
+        let shiftX = event.clientX - el.getBoundingClientRect().left;
+        let shiftY = event.clientY - el.getBoundingClientRect().top;
+
+        function moveAt(pageX, pageY) {
+            el.style.left = pageX - shiftX + 'px';
+            el.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+        document.addEventListener('mousemove', onMouseMove);
+
+        el.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            el.onmouseup = null;
+        };
+    })
+
+    el.ondragstart = function() {
+        return false;
+    }
+
+</script>
+</body>
+</html>

@@ -5,14 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    <ul>
-        <li id="btn"><span>qweqwe</span></li>
-    </ul>
+<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script>
-        btn.addEventListener("click",function (e) {
-            e.stopPropagation();
-            console.log(e.currentTarget);
-        })
+        window.onload = function() {
+            console.log(moment(new Date("2021-10-10")));
+        }
     </script>
 </body>
 </html>

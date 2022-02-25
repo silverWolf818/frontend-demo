@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* setup */
+        html, body, .holster {
+            height: 100%;
+        }
+
+        .container {
+            width: 500px;
+            height: 128px;
+            display: flex;
+            overflow: auto;
+            flex-flow: row nowrap;
+            scroll-behavior: smooth;
+        }
+
+        /* scroll-snap */
+        .x.mandatory-scroll-snapping {
+            scroll-snap-type: x mandatory;
+        }
+
+        .container > div {
+            text-align: center;
+            scroll-snap-align: center;
+            flex: none;
+            width: 500px;
+            height: 128px;
+        }
+
+        /* coloration */
+        .container > div:nth-child(even) {
+            background-color: #87EA87;
+        }
+
+        .container > div:nth-child(odd) {
+            background-color: #87CCEA;
+        }
+        input {
+
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label for="t1">tab1</label>
+    <label for="t2">tab2</label>
+    <label for="t3">tab3</label>
+</div>
+<div class="container x mandatory-scroll-snapping" dir="ltr">
+    <div><input id="t1">1</div>
+    <div><input id="t2">2</div>
+    <div><input id="t3">3</div>
+</div>
+</body>
+</html>

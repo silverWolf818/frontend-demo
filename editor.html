@@ -8,66 +8,63 @@
 <body>
 <div id="edit" contenteditable="true"></div>
 <script>
-    window.onload = function () {
-        // 定义最后光标对象
-        let lastEditRange;
-        const dom = document.getElementById('edit')
+    // 定义最后光标对象
+    let lastEditRange;
+    const dom = document.getElementById('edit')
 
-        function setCaret() {
-            const selection = window.getSelection();// 获取选定对象
-            if (selection.anchorNode) {
-                lastEditRange = selection.getRangeAt(0);// 设置最后光标对象
-            }
+    function setCaret() {
+        const selection = window.getSelection();// 获取选定对象
+        if (selection.anchorNode) {
+            lastEditRange = selection.getRangeAt(0);// 设置最后光标对象
         }
+    }
 
-        function insertAtCaret(content) {
-            const dom = document.getElementById('edit')
-            const txt = content ? content.replace(/<[^>]+>/g, "") : "";
-            dom.focus();
-            const selection = getSelection();
-            if (dom.innerHTML.length === 0) {
-                lastEditRange = selection.getRangeAt(0);// 设置最后光标对象
-            }
-            if (txt !== '\n' && lastEditRange) {
-                selection.removeAllRanges();
-                selection.addRange(lastEditRange);
-            }
-            const range = selection.getRangeAt(0);
-            range.deleteContents();
-            if (txt === '\n') {
-                let _inner, _startOffset;
-                _inner = range.commonAncestorContainer.innerHTML || range.commonAncestorContainer.data || '';
-                range.deleteContents();
-                _startOffset = range.startOffset || 0;
-                if (_startOffset === _inner.length) {
-                    range.insertNode(range.createContextualFragment('\n'));
-                }
-            }
-            const hasR = range.createContextualFragment(txt);
-            const hasR_lastChild = hasR.lastChild;
-            range.insertNode(hasR);
-            if (hasR_lastChild) {
-                range.setEndAfter(hasR_lastChild);
-                range.setStartAfter(hasR_lastChild)
-            }
+    function insertAtCaret(content) {
+        const txt = content;
+        dom.focus();
+        const selection = getSelection();
+        if (dom.innerHTML.length === 0) {
+            lastEditRange = selection.getRangeAt(0);// 设置最后光标对象
+        }
+        if (txt !== '\n' && lastEditRange) {
             selection.removeAllRanges();
-            selection.addRange(range);
-            lastEditRange = selection.getRangeAt(0);
+            selection.addRange(lastEditRange);
         }
-
-        dom.onclick = function() {
-            setCaret();
-        }
-        dom.onkeydown = function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                insertAtCaret("\n");
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        if (txt === '\n') {
+            let _inner, _startOffset;
+            _inner = range.commonAncestorContainer.innerHTML || range.commonAncestorContainer.data || '';
+            range.deleteContents();
+            _startOffset = range.startOffset || 0;
+            if (_startOffset === _inner.length) {
+                range.insertNode(range.createContextualFragment('\n'));
             }
         }
-        dom.onkeyup = function (e) {
-            e.preventDefault();
-            setCaret();
+        const hasR = range.createContextualFragment(txt);
+        const hasR_lastChild = hasR.lastChild;
+        range.insertNode(hasR);
+        if (hasR_lastChild) {
+            range.setEndAfter(hasR_lastChild);
+            range.setStartAfter(hasR_lastChild)
         }
+        selection.removeAllRanges();
+        selection.addRange(range);
+        lastEditRange = selection.getRangeAt(0);
+    }
+
+    dom.onclick = function() {
+        setCaret();
+    }
+    dom.onkeydown = function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            insertAtCaret("\n");
+        }
+    }
+    dom.onkeyup = function (e) {
+        e.preventDefault();
+        setCaret();
     }
 </script>
 </body>

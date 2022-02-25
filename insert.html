@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const data = [{a1: 'a1'},{a2: 'a2'},{a3: 'a3'}]
+    const insertIndex = [0,2]
+    const insertData = [{b: 'b'},{c: 'c'}]
+
+    function insert(data, index, value) {
+        return [...data.slice(0, index), value, ...data.slice(index)]
+    }
+
+    const a = insertIndex.reduce((acc, cur, index) => {
+        return {
+            data: insert(acc.data, cur + acc.acc, insertData[index]),
+            acc: acc.acc + 1
+        }
+    }, {data, acc: 0})
+    console.log(a);
+</script>
+</body>
+</html>

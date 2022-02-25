@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.16.9/antd.css" crossorigin="anonymous" rel="stylesheet">
+</head>
+<body>
+<script>
+    let sum  = 0;
+    function cssReady(fn) {
+        let link = document.getElementsByTagName('link')
+        let currentLink = link[link.length - 1]
+        function check() {
+            if(currentLink && currentLink.sheet && currentLink.sheet.cssRules && currentLink.sheet.cssRules[0]) {
+                sum +=1
+            }
+        }
+        (function poll() {
+            check() && setTimeout(fn, 0) || setTimeout(poll, 100);
+        })()
+    }
+    cssReady()
+    console.log(sum);
+</script>
+</body>
+</html>
