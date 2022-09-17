@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{ message }}
+  <div>
+    <button id="get">获取数据</button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!'
+    }
+  })
+  document.querySelector('#get').addEventListener('click',()=> {
+    // fetch API 获取请求数据
+    app.message = 'other'
+  })
+</script>
+</body>
+</html>

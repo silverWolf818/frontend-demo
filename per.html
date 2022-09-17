@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fn() {
+        console.time('time')
+        var x = []
+        x.push(new Array(1000000).join('x'))
+        console.timeEnd('time')
+    }
+    fn()
+</script>
+</body>
+</html>
